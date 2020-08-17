@@ -1,16 +1,40 @@
-    {
-        "python.linting.pylintEnabled": false,
-        "python.linting.flake8Enabled": true,
-        "python.linting.enabled": true,
-        "python.formatting.provider": "black",
-        "python.formatting.blackArgs": [
-            "--line-length",
-            "79"
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "79"
+    ],
+    "python.linting.flake8Args": [
+        "--max-line-length=79",
+        "--ignore=E402",
+    ],
+    "python.pythonPath": "/usr/bin/python3",
+    "editor.formatOnSave": true,
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautifyrc"
+            ]
+            // "ext": ["js", "json"]
+            // ^^ to set extensions to be beautified using the javascript beautifier
+        },
+        "css": [
+            "css",
+            "scss"
         ],
-        "python.linting.flake8Args": [
-            "--max-line-length=79",
-            "--ignore=E402",
-        ],
-        "python.pythonPath": "/usr/bin/python3",
-        "editor.formatOnSave": true
+        "html": [
+            "htm",
+            "html",
+            "django-html"
+        ]
+        // ^^ providing just an array sets the VS Code file type
     }
+}
