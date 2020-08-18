@@ -1,3 +1,4 @@
+from myblog.settings.base import *  # noqa
 from myblog.settings.base import env, ROOT_DIR
 import os
 

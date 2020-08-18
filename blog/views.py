@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post, Comment
+from blog.models import Post
 from django.views.generic import ListView
 from blog.forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
+from taggit.models import Tag
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class PostListView(ListView):
@@ -10,6 +12,31 @@ class PostListView(ListView):
     context_object_name = "posts"
     paginate_by = 3
     template_name = "blog/post/list.html"
+
+
+def post_list(request, tag_slug=None):
+    objects_list = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        objects_list = objects_list.filter(tags__in=[tag])
+
+    paginator = Paginator(objects_list, 3)
+    page = request.GET.get("page")
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+    return render(
+        request,
+        "blog/post/list.html",
+        {"page": page, "posts": posts, "tag": tag},
+    )
 
 
 def post_detail(request, year, month, day, post):
