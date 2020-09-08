@@ -1,21 +1,82 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static "css/blog.css" %}" rel="stylesheet">
-</head>
 
-<body>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <div id="sidebar">
-        <h2>My blog</h2>
-        <p>This is my blog.</p>
-    </div>
-</body>
+    <!-- FontAwesome JS-->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.1/js/all.js"
+      integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7"
+      crossorigin="anonymous"
+    ></script>
 
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href={% static "css/theme-1.css" %}
+    />
+  </head>
+
+  <body>
+    <header class="header text-center">
+      <h1 class="blog-name pt-lg-4 mb-0">
+        <a href="{% url "blog:post_list" %}">Elvio's RealBlog</a>
+      </h1>
+
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navigation"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navigation" class="collapse navbar-collapse flex-column">
+          <div class="profile-section pt-3 pt-lg-0">
+            <img class="profile-image mb-3 rounded-circle mx-auto" src={% static "images/about-me.jpg" %} alt="image" />
+            <div class="bio mb-3">
+              Hi, my name is Elvio Severino. I am a seasoned BackEnd developer specialized in Python and Django Development. The purpose of this page is for demostration on how a web blog works.<br />
+            </div>
+            <!--//bio-->
+            <ul class="social-list list-inline py-3 mx-auto">
+              <li class="list-inline-item">
+                <a href="https://linkedin.com/in/elvio-severino"><i class="fab fa-linkedin-in fa-fw"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/Delvio"><i class="fab fa-github-alt fa-fw"></i></a>
+              </li>
+
+            </ul>
+            <!--//social-list-->
+            <hr />
+          </div>
+          <!--//profile-section-->
+
+          <ul class="navbar-nav flex-column text-left">
+            <li class="nav-item">
+              <a class="nav-link" href={% url "blog:post_list" %}
+                ><i class="fas fa-home fa-fw mr-2"></i>Blog Home
+                <span class="sr-only">(current)</span></a
+              >
+            </li>
+          <div class="my-2 my-md-3">
+            <a
+              class="btn btn-primary"
+              href="mailto:elvioseverino@gmail.com"
+              target="_blank"
+              >Get in Touch</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    {% block content %}
+    {% endblock %}    
+  </body>
 </html>
