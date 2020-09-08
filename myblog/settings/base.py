@@ -58,7 +58,7 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = [
     # insert thrid party apps here
-    'taggit',
+    "taggit",
 ]
 
 LOCAL_APPS = [
@@ -133,7 +133,8 @@ TEMPLATES = [
         "OPTIONS": {
             # ... some options here ...
             "context_processors": [
-                "django.contrib.auth.context_processors.auth"
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ]
         },
     },
