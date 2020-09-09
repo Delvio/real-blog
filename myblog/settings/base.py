@@ -165,8 +165,6 @@ MEDIA_URL = "/media/"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 
-ROOT_URLCONF = "myblog.urls"
-
 WSGI_APPLICATION = "myblog.wsgi.application"
 
 
