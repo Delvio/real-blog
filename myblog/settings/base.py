@@ -187,3 +187,7 @@ ADMIN_URL = "admin/"
 ADMINS = [("""Elvio Severino""", "elvioseverino@gmail.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
+
+DATABASES = {
+    "default": env.db("DATABASE_URL", default="postgres:///bck_reciclaxrd")
+}
