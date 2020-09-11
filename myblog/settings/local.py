@@ -7,16 +7,13 @@ import os
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env("DJANGO_DEBUG")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env("DJANGO_SECRET_KEY", default="You will not get me that easy",)
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY",
+    default="You will not get me that easy",
+)
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(ROOT_DIR, "db.sqlite3"),
-    }
-}
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
