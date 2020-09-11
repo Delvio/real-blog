@@ -7,7 +7,10 @@ SECRET_KEY = env("SECRET_KEY")
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
 
 DATABASES["default"] = env.db("DATABASE_URL")
-
+DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
+DATABASES["default"]["CONN_MAX_AGE"] = env.int(  # noqa F405
+    "CONN_MAX_AGE", default=60
+)
 
 # EMAIL
 # ------------------------------------------------------------------------------
