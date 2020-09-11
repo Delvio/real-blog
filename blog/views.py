@@ -7,13 +7,6 @@ from taggit.models import Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-class PostListView(ListView):
-    queryset = Post.published.all()
-    context_object_name = "posts"
-    paginate_by = 3
-    template_name = "blog/post/list.html"
-
-
 def post_list(request, tag_slug=None):
     objects_list = Post.published.all()
     tag = None
@@ -23,7 +16,12 @@ def post_list(request, tag_slug=None):
         objects_list = objects_list.filter(tags__in=[tag])
 
     paginator = Paginator(objects_list, 3)
+
     page = request.GET.get("page")
+
+    if not page:
+        page = 1
+
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
