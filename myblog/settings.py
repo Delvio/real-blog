@@ -2,8 +2,7 @@ from pathlib import Path
 import environ
 import os
 
-ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# bck_reciclamas/
+ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent
 APPS_DIR = ROOT_DIR / "myblog"
 env = environ.Env()
 
@@ -12,23 +11,11 @@ READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
+DEBUG = env("DJANGO_DEBUG")
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     default="You will not get me that easy",
 )
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DJANGO_DEBUG")
-
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
 
 
@@ -76,17 +63,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "myblog.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
 
 
 # Password validation
@@ -143,15 +119,25 @@ STATICFILES_FINDERS = [
 
 # MEDIA
 # ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+# https://docs.djangoproject.com/en/dev/ref/settings/#mediqa-root
 MEDIA_ROOT = str(APPS_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
+if READ_DOT_ENV_FILE:
+    # Database
+    # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(ROOT_DIR, "db.sqlite3"),
+        }
+    }
+else:
+    DATABASES = {"default": env.db("DATABASE_URL")}
+    DATABASES["default"]["ATOMIC_REQUESTS"] = True
+    DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
