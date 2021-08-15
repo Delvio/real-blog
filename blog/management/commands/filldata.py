@@ -96,7 +96,7 @@ class Command(BaseCommand):
                 Suspendisse potenti. Phasellus non lectus non dolor interdum ultricies. Aliquam nulla ligula, gravida commodo dolor quis, accumsan suscipit risus. Vivamus eget sem sed neque fringilla consequat at eu mi. Proin ultricies, urna sed maximus molestie, lorem velit consequat ex, ac posuere sapien metus et lectus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi magna libero, laoreet id volutpat at, porttitor quis felis.
                 """,
                 publish=self.generate_random_date(),
-                status="Published",
+                status="published",
                 tags=self.generate_random_tags(),
             )
             post.save()
